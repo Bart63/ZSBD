@@ -1,4 +1,8 @@
-﻿use narciarze
+﻿-- Autorzy:
+-- Bartosz Durys 229869
+-- Szymon Klewicki 229911
+
+use narciarze
 
 -- #1 
 SELECT * FROM kraje; 
@@ -107,7 +111,7 @@ ADD CONSTRAINT FKZawodnicyTrenerzy FOREIGN KEY (trener)
 REFERENCES trenerzy (id_trenera);
 
 -- #17
--- Zakładamy, że o 5 lat starszą, dodajemy -5
+-- Zakładamy, że o 5 lat starszą datę, dodajemy -5
 UPDATE trenerzy
 SET data_ur_t = (
 	SELECT

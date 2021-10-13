@@ -1,4 +1,8 @@
-﻿use biuro;
+﻿-- Autorzy:
+-- Bartosz Durys 229869
+-- Szymon Klewicki 229911
+
+use biuro;
 
 -- #1
 SELECT 
