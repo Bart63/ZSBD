@@ -2,7 +2,7 @@
 -- Bartosz Durys 229869
 -- Szymon Klewicki 229911
 
-use narciarze
+use narciarze;
 
 -- #1 
 SELECT * FROM kraje; 
@@ -21,7 +21,7 @@ WHERE k.id_kraju NOT IN (
 
 -- #3
 -- Używamy LEFT JOINa, żeby uwzględnić kraje bez zawodników
-SELECT k.kraj, COUNT(z.id_skoczka)
+SELECT k.kraj, COUNT(z.id_skoczka) AS ile_zawodnikow
 FROM kraje AS k
 LEFT JOIN zawodnicy AS z
 ON k.id_kraju=z.id_kraju
@@ -35,7 +35,7 @@ WHERE z.id_skoczka NOT IN (
 
 -- #5
 -- Używamy LEFT JOINa na przyszłość gdyby istniaj zawodnik bez zawodów
-SELECT z.nazwisko, COUNT(u.id_zawodow)
+SELECT z.nazwisko, COUNT(u.id_zawodow) AS ile_zawodow
 FROM zawodnicy AS z
 LEFT JOIN uczestnictwa_w_zawodach AS u
 ON z.id_skoczka=u.id_skoczka
@@ -48,18 +48,18 @@ WHERE zs.id_skoczka=u.id_skoczka AND u.id_zawodow=z.id_zawodow
 AND z.id_skoczni=s.id_skoczni;
 
 -- #7
-SELECT id_skoczka, DATEDIFF(year, data_ur, getdate()) AS age
+SELECT id_skoczka, DATEDIFF(year, data_ur, getdate()) AS wiek
 FROM zawodnicy
-ORDER BY age DESC;
+ORDER BY wiek DESC;
 
 -- #8
-SELECT zs.id_skoczka, MIN(DATEDIFF(year, zs.data_ur, z.DATA))
+SELECT zs.id_skoczka, MIN(DATEDIFF(year, zs.data_ur, z.DATA)) AS wiek
 FROM zawodnicy AS zs, uczestnictwa_w_zawodach AS u, zawody AS z
 WHERE zs.id_skoczka=u.id_skoczka AND u.id_zawodow=z.id_zawodow
 GROUP BY zs.id_skoczka;
 
 -- #9
-SELECT sedz-k FROM skocznie;
+SELECT sedz-k AS roznica FROM skocznie;
 
 -- #10
 -- Gdyby wiele skoczni miało najdłuższy punkt konstrukcyjny
@@ -73,7 +73,7 @@ WHERE z.id_skoczni=s.id_skoczni;
 
 -- #12
 -- Uwzględniamy postępowanie #3 i #5
-SELECT zs.id_skoczka, COUNT(u.id_zawodow+z.id_zawodow)
+SELECT zs.id_skoczka, COUNT(u.id_zawodow+z.id_zawodow) AS skoki
 FROM uczestnictwa_w_zawodach AS u
 RIGHT JOIN zawodnicy AS zs
 ON u.id_skoczka=zs.id_skoczka
