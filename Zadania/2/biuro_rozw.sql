@@ -34,7 +34,7 @@ FROM nieruchomosci AS n;
 SELECT 
 	w.nieruchomoscNr, 
 	SUM(w.czynsz*(1 + DATEDIFF(mm, w.od_kiedy, w.do_kiedy)))
-FROM wynajecia AS w;
+FROM wynajecia AS w group by w.nieruchomoscNr;
 
 -- #4
 -- Wliczamy biura bez nieruchomosci i nieruchomosci bez wynajęć
