@@ -33,8 +33,9 @@ FROM nieruchomosci AS n;
 -- Możliwa rezerwacja od pierwszego dnia do ostatniego dnia danego miesiąca
 SELECT 
 	w.nieruchomoscNr, 
-	SUM(w.czynsz*(1 + DATEDIFF(mm, w.od_kiedy, w.do_kiedy)))
-FROM wynajecia AS w group by w.nieruchomoscNr;
+	SUM(w.czynsz*(1 + DATEDIFF(mm, w.od_kiedy, w.do_kiedy))) AS laczny_czynsz
+FROM wynajecia AS w 
+GROUP BY w.nieruchomoscNr;
 
 -- #4
 -- Wliczamy biura bez nieruchomosci i nieruchomosci bez wynajęć
