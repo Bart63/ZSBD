@@ -1,4 +1,7 @@
-﻿------------------------------------
+﻿-- Autorzy:
+-- Bartosz Durys 229869
+-- Szymon Klewicki 229911
+------------------------------------
 
 declare @x int, @s varchar(10) 
  
