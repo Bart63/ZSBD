@@ -215,8 +215,6 @@ end
 go 
 select * from test_cwiczenia..liczby; 
  
- 
-
 -- 2. -- 
 use test_cwiczenia 
 go 
@@ -235,11 +233,6 @@ go
 exec test_cwiczenia..proc_liczby 3 
 exec test_cwiczenia..proc_liczby 
 go 
- 
-
- 
-
- 
  
 -- 3 -- 
 use test_cwiczenia 
@@ -266,30 +259,24 @@ go
 
 --- Proszę zmodyfikować przykłady – dostosować do własnych baz!!! ----- 
  
-
 use test_cwiczenia 
- 
- 
 
--- 1 -- 
-
+-- 1 --
  
 -- drop function fn_srednia 
  
-create function fn_srednia(@rodzaj varchar(12)) returns int 
+create function fn_srednia(@rodzaj varchar(max)) returns money 
 begin 
-  return (select avg(price) from pubs..titles where type=@rodzaj) 
+  return (select avg(cena) from biblioteka..ksiazki where gatunek=@rodzaj) 
 end 
- 
 
-select dbo.fn_srednia('business') 
- 
- 
+select dbo.fn_srednia('dla dzieci') as [średnia]
+
 -- 2 -- 
  
 --drop function funkcja 
  
 create function funkcja(@max int) returns table 
-return (select * from liczby where liczba<=@max) 
+return (select * from biblioteka..ksiazki where cena<=@max) 
  
-select * from funkcja(3)
+select * from funkcja(20)
