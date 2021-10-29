@@ -65,57 +65,60 @@ BEGIN
 END
 
 -- #8
+BEGIN
 DECLARE curs CURSOR FOR
 SELECT NR_ODD, NAZWA_ODD FROM test.dbo.oddzialy
 DECLARE @nr INT, @name VARCHAR(MAX)
 OPEN curs
 FETCH NEXT FROM curs INTO @nr, @name
 WHILE @@FETCH_STATUS=0
-	BEGIN
-		PRINT 'NUMER ODDZIALU TO: ' + CAST(@nr AS VARCHAR(MAX)) + ', NAZWA ODDZIALU TO: ' + @name
-		FETCH NEXT FROM curs INTO @nr, @name
-	END
+BEGIN
+	PRINT 'NUMER ODDZIALU TO: ' + CAST(@nr AS VARCHAR(MAX)) + ', NAZWA ODDZIALU TO: ' + @name
+	FETCH NEXT FROM curs INTO @nr, @name
+END
 CLOSE curs
 DEALLOCATE curs
+END
 
 -- #9
+DECLARE @from INT=2
 DECLARE curs2 CURSOR FOR
-SELECT NR_ODD, NAZWA_ODD FROM test.dbo.oddzialy
-DECLARE @nr2 INT, @name2 VARCHAR(MAX), @from INT=2, @deleted INT=0
+SELECT NR_ODD FROM test.dbo.oddzialy WHERE NR_ODD>@from
+DECLARE @nr2 INT, @deleted INT=0
 OPEN curs2
-FETCH NEXT FROM curs2 INTO @nr2, @name2
+FETCH NEXT FROM curs2 INTO @nr2
 WHILE @@FETCH_STATUS=0
-	BEGIN
-		IF EXISTS (SELECT * FROM test.dbo.oddzialy
-			WHERE NR_ODD=@nr2 AND @nr2>@from)
+BEGIN
+	IF EXISTS (SELECT * FROM test.dbo.oddzialy
+		WHERE @nr2>@from)
 		BEGIN
-			DELETE TOP (1) FROM test.dbo.oddzialy 
-			WHERE NR_ODD=@nr2
+			DELETE FROM test.dbo.oddzialy 
+			WHERE CURRENT OF curs2
 			SET @deleted = @deleted+1
 		END
-		FETCH NEXT FROM curs2 INTO @nr2, @name2
-	END
+	FETCH NEXT FROM curs2 INTO @nr2
+END
 PRINT 'Liczba usuniętych rekordow to: ' + CAST(@deleted AS VARCHAR(MAX))
 CLOSE curs2
 DEALLOCATE curs2
 
 -- #10
-DECLARE curs3 CURSOR FOR
-SELECT NR_ODD, NAZWA_ODD FROM test.dbo.oddzialy
-DECLARE @nr3 INT, @name3 VARCHAR(MAX), @id3 INT=3, @found BIT=0
-OPEN curs3
-FETCH NEXT FROM curs3 INTO @nr3, @name3
-WHILE (@@FETCH_STATUS=0 AND @found=0)
 BEGIN
-	IF(@nr3=@id3)
-	BEGIN
-		UPDATE test.dbo.oddzialy 
-			SET NAZWA_ODD='Programmers' 
-			WHERE NR_ODD=@id3
-		SET @found=1
-	END
-	FETCH NEXT FROM curs3 INTO @nr3, @name3
+DECLARE @nr_od INT=3;
+DECLARE curs3 CURSOR FOR
+SELECT NR_ODD FROM test.dbo.oddzialy WHERE NR_ODD=@nr_od;
+DECLARE @nr3 INT, @found BIT=0
+OPEN curs3
+FETCH NEXT FROM curs3 INTO @nr3
+WHILE (@@FETCH_STATUS=0)
+BEGIN
+	UPDATE test.dbo.oddzialy 
+	SET NAZWA_ODD='Programmers' 
+	WHERE CURRENT OF curs3
+	SET @found=1
+	FETCH NEXT FROM curs3 INTO @nr3
 END
 IF (@found=0) INSERT INTO test.dbo.oddzialy VALUES(3, 'Programmers')
 CLOSE curs3
 DEALLOCATE curs3
+END
