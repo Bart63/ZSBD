@@ -1,0 +1,26 @@
+Restauracja
+
+Potrawy -> Zamowienie <- Stolik <- Rezerwacja
+Zamowienia <- Pracownicy <- Stanowisko
+Pracownicy <- Zmiany <- Obecnosc
+
+Potrawy: id_potrawy, typ, nazwa, cena, gramatura, czy_dostepny
+Stoliki: id_stolika, liczba_miejsc, lokalizacja, czy_wolne
+Rezerwacje: id_rezerwacji, id_stolika, nazwisko, data_rozpoczęcia, data_zakończenia, liczba_osob
+Stanowiska: id_stanowiska, nazwa, placa_min, placa_max, zatrudnionych_min, zatrudnionych_max
+Imprezy: id_imprezy, nazwa, data_rozpoczecia, data_zakonczenia, liczba_osob, komentarz
+Pracownicy: id_pracownika, imie, naziwsko, plec, id_stanowiska, data_zatrudnienia, data_zwolnienia, placa, premia
+Zmiany: id_zmiany, id_pracownika, data_rozpoczecia, data_zakonczenia, obecnosc
+Zamowienia: id_stolika, id_potrawy, liczba, data_zlozenia, data_realizacji, komentarz, id_kelnera, id_kucharza
+
+
+Opis:
+W restauracji pracownicy są na różnych stanowiskach, które mają widełki płac. Każda osoba ma ustalone zmiany, na które może przyjść.
+Klienci rezerwują stolik na nazwisko. Zamówienia składają na dany stolik i złożone są z różnych potraw.
+Podczas imprez cała restauracja jest zajęta i nie przyjmuje na ten okres rezerwacji, ale może przyjmować zamówienia dodatkowe dla gości imprezy.
+
+Potrawy mogą być danego typu np. "miesne", "wegan", "sniadanie", "napoj"
+
+imprezy nazwa: "wesele", "poprawiny", "urodziny", "studniówka", "impreza firmowa"	
+
+obecnosc: "zwolnienie usprawiedliwione", "urlop na życzenie", "urlop", "nadgodziny", "chorobowe", "nieobecny", "obecny"
