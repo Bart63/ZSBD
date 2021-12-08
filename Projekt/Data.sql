@@ -44,9 +44,11 @@ INSERT INTO rezerwacje VALUES
 	(1, 'Durys', @cur_date, DATEADD(HOUR, 1, @cur_date), 2),
 	(3, 'Klewicki', @cur_date, DATEADD(HOUR, 2, @cur_date), 3)
 
+
 INSERT INTO stanowiska VALUES
 	('kelner', 2500, 3000, 1, 3),
-	('kucharz', 2800, 3800, 2, 4)
+	('kucharz', 2800, 3800, 2, 4),
+	('szef kuchni', 3500, 4600, 1, 1)
 
 INSERT INTO imprezy VALUES
 	('urodziny', DATEADD(day, 1, @cur_date), DATEADD(day, 2, @cur_date), 23, 'jednodniowa impreza')
@@ -57,7 +59,8 @@ INSERT INTO pracownicy VALUES
 	('Barbara', 'Wróbel', 'K', 1, DATEADD(YEAR, -1, @cur_date), DATEADD(MONTH, -2, @cur_date), 3000, 0),
 	('Henryk', 'Mazur', 'M', 2, DATEADD(YEAR, -1, @cur_date), NULL, 3300, 200),
 	('Alicja', 'Dąbrowska', 'K', 2, DATEADD(MONTH, -6, @cur_date), NULL, 3100, 0),
-	('Ryszard', 'Zając', 'M', 2, DATEADD(YEAR, -1, @cur_date), DATEADD(MONTH, -5, @cur_date), 3400, 0)
+	('Ryszard', 'Zając', 'M', 2, DATEADD(YEAR, -1, @cur_date), DATEADD(MONTH, -5, @cur_date), 3400, 0),
+	('Paweł', 'Nowakowski', 'M', 3, DATEADD(YEAR, -1, @cur_date), null, 4500, 0)
 
 INSERT INTO zmiany VALUES
 	(1, DATEADD(DAY, -1, @cur_date), DATEADD(HOUR, -14, @cur_date), 'obecny'),

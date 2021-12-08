@@ -6,8 +6,8 @@ IF EXISTS(SELECT 1 FROM master.dbo.sysdatabases WHERE NAME = 'restauracja')
 BEGIN
 	ALTER DATABASE [restauracja] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 	DROP DATABASE restauracja;
-	CREATE DATABASE restauracja
-	ALTER DATABASE [restauracja] SET MULTI_USER
+	CREATE DATABASE restauracja;
+	ALTER DATABASE [restauracja] SET MULTI_USER;
 END
 GO
 USE restauracja
