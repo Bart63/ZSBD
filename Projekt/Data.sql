@@ -24,18 +24,18 @@ INSERT INTO potrawy VALUES
 	('deser', 'szarlotka z bitą śmietaną', 18, 200, 0)
 	
 INSERT INTO stoliki VALUES 
-	(2, 'przód', 1),
-	(2, 'przód', 1),
-	(4, 'przód', 1),
-	(4, 'przód', 1),
-	(6, 'środek', 1),
-	(6, 'środek', 1),
-	(4, 'tył', 1),
-	(4, 'tył', 1),
-	(2, 'tył', 1),
-	(4, 'lewa ściana', 1),
-	(4, 'lewa ściana', 1),
-	(6, 'prawa ściana', 1)
+	(2, 'przód'),
+	(2, 'przód'),
+	(4, 'przód'),
+	(4, 'przód'),
+	(6, 'środek'),
+	(6, 'środek'),
+	(4, 'tył'),
+	(4, 'tył'),
+	(2, 'tył'),
+	(4, 'lewa ściana'),
+	(4, 'lewa ściana'),
+	(6, 'prawa ściana')
 	
 DECLARE @cur_date datetime = GETDATE();
 INSERT INTO rezerwacje VALUES
@@ -64,24 +64,16 @@ INSERT INTO zmiany VALUES
 	(2, DATEADD(HOUR, -6, @cur_date), DATEADD(HOUR, 4, @cur_date), 'obecny'),
 	(4, DATEADD(DAY, -1, @cur_date), DATEADD(HOUR, -14, @cur_date), 'obecny'),
 	(5, DATEADD(HOUR, -6, @cur_date), DATEADD(HOUR, 4, @cur_date), 'obecny'),
+	(4, DATEADD(HOUR, -1, @cur_date), DATEADD(HOUR, 7, @cur_date), 'nieobecność nieusprawiedliwiona'),
 	(1, DATEADD(DAY, 1, @cur_date), DATEADD(HOUR, 34, @cur_date), 'obecny'),
 	(5, DATEADD(DAY, 1, @cur_date), DATEADD(HOUR, 34, @cur_date), 'obecny'),
 	(4, DATEADD(DAY, 1, @cur_date), DATEADD(DAY, 5, @cur_date), 'urlop')
 
 INSERT INTO zamowienia VALUES
-	(1, 13, 1, DATEADD(HOUR, -6, @cur_date), DATEADD(HOUR, -6, @cur_date), '', 2, NULL),
+	(1, 13, 1, DATEADD(HOUR, -6, @cur_date), DATEADD(HOUR, -6, @cur_date), NULL, 2, NULL),
 	(5, 1, 2, DATEADD(HOUR, -1, @cur_date), @cur_date, 'medium rare', 2, 5),
-	(5, 2, 2, DATEADD(HOUR, -1, @cur_date), @cur_date, '', 2, 5),
-	(5, 9, 1, DATEADD(HOUR, -1, @cur_date), @cur_date, '', 2, 5),
+	(5, 2, 2, DATEADD(HOUR, -1, @cur_date), @cur_date, NULL, 2, 5),
+	(5, 9, 1, DATEADD(HOUR, -1, @cur_date), @cur_date, NULL, 2, 5),
 	(1, 15, 1, @cur_date, @cur_date, '', 2, NULL),
-	(3, 11, 2, @cur_date, @cur_date, '', 2, 5),
-	(3, 3, 2, @cur_date, @cur_date, '', 2, 5)
-
-SELECT * FROM potrawy
-SELECT * FROM stoliki
-SELECT * FROM rezerwacje
-SELECT * FROM stanowiska
-SELECT * FROM imprezy
-SELECT * FROM pracownicy
-SELECT * FROM zmiany
-SELECT * FROM zamowienia
+	(3, 11, 2, @cur_date, NULL, NULL, 2, 5),
+	(3, 3, 2, @cur_date, NULL, NULL, 2, 5)

@@ -29,7 +29,6 @@ CREATE TABLE stoliki(
 	id_stolika tinyint IDENTITY(1,1) PRIMARY KEY,
 	liczba_miejsc tinyint NOT NULL,
 	lokalizacja nvarchar(max) NOT NULL,
-	czy_wolne bit NOT NULL DEFAULT 1,
 	CONSTRAINT CHK_liczba_os_stoliki CHECK (liczba_miejsc > 0)
 );
 GO
@@ -40,10 +39,11 @@ CREATE TABLE rezerwacje(
 	nazwisko nvarchar(max) NOT NULL,
 	data_rozpoczecia datetime NOT NULL DEFAULT GETDATE(),
 	data_zakonczenia datetime NOT NULL,
-	liczba_osob smallint NOT NULL,
+	liczba_osob tinyint NOT NULL,
 	CONSTRAINT FK_rezerwacje_stoliki FOREIGN KEY(id_stolika) REFERENCES stoliki (id_stolika),
 	CONSTRAINT CHK_data_zakonczenia_rezerwacje CHECK (data_zakonczenia > data_rozpoczecia),
-	CONSTRAINT CHK_liczba_os_rezerwacje CHECK (liczba_osob > 0)
+	CONSTRAINT CHK_liczba_os_rezerwacje CHECK (liczba_osob > 0),
+	CONSTRAINT CHK_nazwisko CHECK (LEN(nazwisko) > 1)
 );
 GO
 
