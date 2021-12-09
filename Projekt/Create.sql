@@ -1,8 +1,8 @@
-﻿USE master;
-GO
+﻿-- Bartosz Durys 229869, Szymon Klewicki 229911
+
 USE master;
 GO
-IF EXISTS(SELECT 1 FROM master.dbo.sysdatabases WHERE NAME = 'restauracja') 
+IF EXISTS(SELECT 1 FROM dbo.sysdatabases WHERE NAME = 'restauracja') 
 BEGIN
 	ALTER DATABASE [restauracja] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 	DROP DATABASE restauracja;

@@ -1,4 +1,6 @@
-﻿USE restauracja
+﻿-- Bartosz Durys 229869, Szymon Klewicki 229911
+
+USE restauracja
 
 -- Wyświetlanie danych
 
@@ -32,8 +34,11 @@ SELECT AVG(cena) FROM potrawy
 -- 5. Minimalna cena dodatku
 SELECT MIN(cena) FROM potrawy WHERE typ='dodatki'
 
--- 6. Dostępne stoliki
-SELECT COUNT(*) FROM stoliki WHERE czy_wolne=1
+-- 6. Ile dostępnych stolików
+SELECT (SELECT COUNT(*) FROM stoliki) - COUNT(*) 
+FROM stoliki s, rezerwacje r
+WHERE s.id_stolika = r.id_stolika
+AND GETDATE() BETWEEN r.data_rozpoczecia AND r.data_zakonczenia
 
 -- 7. Lokalizacje stołów i liczb siedzeń
 SELECT lokalizacja, SUM(liczba_miejsc) AS siedzenia 

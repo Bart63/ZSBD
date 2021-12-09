@@ -1,6 +1,9 @@
-﻿-- Procedury i funkcje
+﻿-- Bartosz Durys 229869, Szymon Klewicki 229911
+
 USE restauracja
 GO
+
+-- Procedury i funkcje
 
 -- Procedury:
 
@@ -209,7 +212,7 @@ BEGIN
 		SELECT id_pracownika FROM pracownicy 
 		WHERE id_stanowiska = (
 			SELECT id_stanowiska FROM stanowiska
-			WHERE nazwa='kucharz'
+			WHERE nazwa='kucharz' OR nazwa='szef kuchni'
 		)
 	)
 	BEGIN

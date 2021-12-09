@@ -1,4 +1,6 @@
-﻿USE restauracja;
+﻿-- Bartosz Durys 229869, Szymon Klewicki 229911
+
+USE restauracja;
 GO
 
 INSERT INTO potrawy VALUES 
@@ -42,7 +44,9 @@ INSERT INTO rezerwacje VALUES
 	(1, 'Nowak', DATEADD(HOUR, -6, @cur_date), DATEADD(HOUR, -5, @cur_date), 1),
 	(5, 'Kowalski', DATEADD(HOUR, -1, @cur_date), DATEADD(HOUR, 1, @cur_date), 5),
 	(1, 'Durys', @cur_date, DATEADD(HOUR, 1, @cur_date), 2),
-	(3, 'Klewicki', @cur_date, DATEADD(HOUR, 2, @cur_date), 3)
+	(3, 'Klewicki', @cur_date, DATEADD(HOUR, 2, @cur_date), 3),
+	(4, 'Kaźmierczak', DATEADD(DAY, 1, @cur_date), DATEADD(HOUR, 26, @cur_date), 3),
+	(5, 'Jaworska', DATEADD(HOUR, 1, @cur_date), DATEADD(HOUR, 27, @cur_date), 5)
 
 
 INSERT INTO stanowiska VALUES
@@ -51,7 +55,7 @@ INSERT INTO stanowiska VALUES
 	('szef kuchni', 3500, 4600, 1, 1)
 
 INSERT INTO imprezy VALUES
-	('urodziny', DATEADD(day, 1, @cur_date), DATEADD(day, 2, @cur_date), 23, 'jednodniowa impreza')
+	('urodziny', DATEADD(day, 10, @cur_date), DATEADD(day, 11, @cur_date), 23, 'jednodniowa impreza')
 
 INSERT INTO pracownicy VALUES
 	('Jan', 'Kowalski', 'M', 1, DATEADD(YEAR, -1, @cur_date), NULL, 2800, 100),
